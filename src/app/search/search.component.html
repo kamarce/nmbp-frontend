@@ -1,0 +1,52 @@
+<h1>Search</h1>
+
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="title">User Query:</label>
+    <input type="text" formControlName="userQuery" class="form-control">
+    <div *ngIf="isFieldInvalid('userQuery')" class="alert alert-danger">Query is required!</div>
+  </div>
+
+  <div class="form-group">
+    <label for="title">Operator:</label>
+    <div style="display:block">
+
+      <div>
+        <input type="radio" value="AND" formControlName="operator">
+        ADD
+      </div>
+
+      <div>
+        <input type="radio" value="OR" formControlName="operator">
+        OR
+      </div>
+    </div>
+
+  </div>
+
+  <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+<br><br>
+
+<div *ngIf="response">
+<h2>Response</h2> 
+<h4>Query:</h4> 
+<p>
+  {{response.query}}
+</p>
+
+<h4>Number of Documents Found:</h4> 
+<p>
+  {{response.nDocs}}
+</p>
+
+
+<h4>Ranks:</h4> 
+<ul>
+  <li *ngFor="let rankLine of response.ranks">{{rankLine}}</li>
+</ul>
+
+
+</div>
